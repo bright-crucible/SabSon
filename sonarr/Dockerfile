@@ -2,8 +2,15 @@ FROM mono:latest
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get update \
     && apt-get -y install \
-        libmediainfo-dev \
         wget \
+        ca-certificates \
+        apt-transport-https \
+    && wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-12_all.deb \
+    && dpkg -i repo-mediaarea_1.0-12_all.deb \
+    && rm repo-mediaarea_1.0-12_all.deb \
+    && apt-get update \
+    && apt-get -y install \
+        libmediainfo-dev \
     && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -g 1000 sonarr \
