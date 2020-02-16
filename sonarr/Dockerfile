@@ -7,7 +7,7 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -g 1000 sonarr \
-    && useradd -u 1000 -g 1000 -d /home/sonarr -m sonarr \
+    && useradd -s /sbin/nologin -u 1000 -g 1000 -d /home/sonarr -m sonarr \
     && mkdir /data \
     && mkdir -p /home/sonarr/.config/Sonarr \
     && chown sonarr:sonarr /data \

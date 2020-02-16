@@ -14,7 +14,7 @@ RUN apk add --no-cache \
         openssl-dev \
     && ln -s /usr/local/bin/python /usr/bin/python \
     && addgroup -S sabnzbd -g 1000 \
-    && adduser -s /usr/sbin/nologin -u 1000 -S sabnzbd -G sabnzbd \
+    && adduser -s /sbin/nologin -u 1000 -S sabnzbd -G sabnzbd \
     && mkdir \
         /data \
         /SABnzbd \
