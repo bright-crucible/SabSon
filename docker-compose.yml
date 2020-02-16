@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+    sabnzbd:
+        build: sabnzbd
+        image: cronos/sabnzbd
+        restart: unless-stopped
+        volumes:
+            - $PWD/data/usenet:/data/usenet
+            - $PWD/config/sabnzbd:/home/sabnzbd/.sabnzbd
+        ports:
+            - "127.0.0.1:8080:8080/tcp"
+    sonarr:
+        build: sonarr
+        image: cronos/sonarr
+        restart: unless-stopped
+        volumes:
+            - $PWD/data:/data
+            - $PWD/config/sonarr:/home/sonarr/.config/Sonarr
+        ports:
+            - "127.0.0.1:8989:8989/tcp"
+        depends_on:
+            - "sabnzbd"
