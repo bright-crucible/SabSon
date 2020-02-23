@@ -36,8 +36,7 @@ RUN apk add --no-cache \
         sabyenc \
     && wget -O- https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VER}/SABnzbd-${SABNZBD_VER}-src.tar.gz \
     | tar xz -C /SABnzbd --strip-components=1
+COPY rename_mkv.sh /SABnzbd/scripts
 USER sabnzbd
 WORKDIR /SABnzbd
-#CMD ["python", "-OO", "./SABnzbd.py"]
-#CMD ["python", "-OO", "./SABnzbd.py", "--server", "0.0.0.0:8080"]
 CMD ["./SABnzbd.py"]
