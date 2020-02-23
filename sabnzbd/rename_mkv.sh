@@ -28,20 +28,20 @@ echo "URL: ${URL}"
 
 for entry in "$FINAL_DIR"/*
 do
+    echo "Entry: ${entry}"
     TYPE=`file -b "${entry}"`
     if [ "${TYPE}" == "${MATROSKA}" ]
     then
-        echo "$entry"
         BASENAME=`basename "${entry}"`
         EXTENSION="${BASENAME##*.}"
-        echo $EXTENSION
+        echo "Entry extension: ${EXTENSION}"
         if [ "${EXTENSION}" != "${EXT}" ]
         then
             if mv "${entry}" "${entry}.${EXT}"
             then
-                echo "Renamed ${entry} to ${entry}.${EXT}"
+                echo -e "Renamed \n\t${entry} \n\tto \n\t${entry}.${EXT}"
             else
-                echo "Failed, could not rename ${entry} to ${entry}.${EXT}" >&2
+                echo -e "Failed, could not rename \n\t${entry} \n\tto \n\t${entry}.${EXT}" >&2
                 EXIT_CODE=1
             fi
         fi
