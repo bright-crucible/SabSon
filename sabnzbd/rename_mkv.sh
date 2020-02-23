@@ -47,4 +47,5 @@ do
         fi
     fi
 done
+echo Completed
 exit ${EXIT_CODE}
