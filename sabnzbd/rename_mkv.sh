@@ -11,6 +11,7 @@ URL="$8"
 MATROSKA="Matroska data"
 EXT="mkv"
 EXIT_CODE=0
+EXIT_STRING="Completed"
 
 if [ -z $FINAL_DIR ]
 then
@@ -44,8 +45,9 @@ do
                 echo -e "Failed, could not rename \n\t${entry} \n\tto \n\t${entry}.${EXT}" >&2
                 EXIT_CODE=1
             fi
+            EXIT_STRING="Renamed"
         fi
     fi
 done
-echo Completed
+echo "${EXIT_STRING}"
 exit ${EXIT_CODE}
