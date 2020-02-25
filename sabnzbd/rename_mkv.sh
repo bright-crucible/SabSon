@@ -10,7 +10,7 @@ URL="$8"
 
 MATROSKA="Matroska data"
 EXT="mkv"
-EXIT_CODE=0
+EXIT_CODE="${STATUS}"
 EXIT_STRING="Completed"
 
 if [ -z $FINAL_DIR ]
