@@ -1,13 +1,14 @@
 FROM mono:latest
+ENV MEDIAAREA_VER 1.0-13
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get update \
     && apt-get -y install \
         wget \
         ca-certificates \
         apt-transport-https \
-    && wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-12_all.deb \
-    && dpkg -i repo-mediaarea_1.0-12_all.deb \
-    && rm repo-mediaarea_1.0-12_all.deb \
+    && wget https://mediaarea.net/repo/deb/repo-mediaarea_${MEDIAAREA_VER}_all.deb \
+    && dpkg -i repo-mediaarea_${MEDIAAREA_VER}_all.deb \
+    && rm repo-mediaarea_${MEDIAAREA_VER}_all.deb \
     && apt-get update \
     && apt-get -y install \
         libmediainfo-dev \
