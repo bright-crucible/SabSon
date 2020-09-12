@@ -1,5 +1,5 @@
 FROM python:3-alpine
-ENV SABNZBD_VER 3.0.2RC2
+ENV SABNZBD_VER 3.1.0Beta2
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
