@@ -12,6 +12,8 @@ RUN apk add --no-cache \
         autoconf \
         libffi-dev \
         openssl-dev \
+        rust \
+        cargo \
     && ln -s /usr/local/bin/python3 /usr/bin/python3 \
     && addgroup -S sabnzbd -g 1000 \
     && adduser -s /sbin/nologin -u 1000 -S sabnzbd -G sabnzbd \
