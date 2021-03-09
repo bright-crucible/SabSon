@@ -1,6 +1,8 @@
 FROM mono:latest
 ENV MEDIAAREA_VER 1.0-13
+ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
+    && echo $TZ > /etc/localtime \
     && apt-get update \
     && apt-get -y install \
         wget \
@@ -12,7 +14,6 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get update \
     && apt-get -y install \
         libmediainfo-dev \
-    && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -g 1000 sonarr \
     && useradd -s /sbin/nologin -u 1000 -g 1000 -d /home/sonarr -m sonarr \
