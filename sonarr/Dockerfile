@@ -21,7 +21,7 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && mkdir -p /home/sonarr/.config/Sonarr \
     && chown sonarr:sonarr /data \
     && chown -R sonarr:sonarr /home/sonarr/.config \
-    && wget -O- 'https://services.sonarr.tv/v1/download/phantom-develop/latest?version=3&os=linux' \
+    && wget -O- 'https://services.sonarr.tv/v1/download/main/latest?version=3&os=linux' \
     | tar xz
 USER sonarr
 WORKDIR /Sonarr
