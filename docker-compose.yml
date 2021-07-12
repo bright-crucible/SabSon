@@ -3,6 +3,7 @@ services:
     sabnzbd:
         build: sabnzbd
         image: cronos/sabnzbd
+        hostname: sabnzbd
         restart: unless-stopped
         volumes:
             - $PWD/data/usenet:/data/usenet
@@ -12,6 +13,7 @@ services:
     sonarr:
         build: sonarr
         image: cronos/sonarr
+        hostname: sonarr
         restart: unless-stopped
         volumes:
             - $PWD/data:/data
@@ -22,6 +24,7 @@ services:
             - "sabnzbd"
     plex:
         image: linuxserver/plex
+        hostname: plex
         container_name: plex
         network_mode: host
         environment:
