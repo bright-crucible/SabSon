@@ -1,5 +1,5 @@
 FROM mono:latest
-ENV MEDIAAREA_VER 1.0-16
+ENV MEDIAAREA_VER 1.0-19
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && echo $TZ > /etc/localtime \
