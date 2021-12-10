@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3-alpine3.14
 ENV SABNZBD_VER 3.4.2
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
