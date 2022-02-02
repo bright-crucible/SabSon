@@ -14,6 +14,7 @@ RUN apk add --no-cache \
         openssl-dev \
         rust \
         cargo \
+        par2cmdline \
     && ln -s /usr/local/bin/python3 /usr/bin/python3 \
     && addgroup -S sabnzbd -g 1000 \
     && adduser -s /sbin/nologin -u 1000 -S sabnzbd -G sabnzbd \
@@ -22,20 +23,10 @@ RUN apk add --no-cache \
         /SABnzbd \
     && chown sabnzbd:sabnzbd \
         /data \
-    && git clone https://github.com/Parchive/par2cmdline.git \
-    && cd par2cmdline \
-    && aclocal \
-    && automake --add-missing \
-    && autoconf \
-    && ./configure \
-    && make -j12 \
-    && make install \
-    && cd .. \
-    && rm -rf par2cmdline \
     && wget -O- https://www.rarlab.com/rar/unrarsrc-${UNRAR_VER}.tar.gz \
     | tar xz \
     && cd unrar \
-    && make \
+    && make -j12 \
     && make install \
     && cd .. \
     && rm -rf unrar \
