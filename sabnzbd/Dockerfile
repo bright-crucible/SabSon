@@ -1,9 +1,9 @@
-FROM python:3-alpine3.14
-ENV SABNZBD_VER 3.4.2
+FROM python:3-alpine
+ENV SABNZBD_VER 3.5.0
+ENV UNRAR_VER 6.1.4
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
-        unrar \
         unzip \
         p7zip \
         build-base \
@@ -32,6 +32,13 @@ RUN apk add --no-cache \
     && make install \
     && cd .. \
     && rm -rf par2cmdline \
+    && wget -O- https://www.rarlab.com/rar/unrarsrc-${UNRAR_VER}.tar.gz \
+    | tar xz \
+    && cd unrar \
+    && make \
+    && make install \
+    && cd .. \
+    && rm -rf unrar \
     && git clone https://github.com/sabnzbd/sabnzbd.git SABnzbd \
     && cd SABnzbd \
     && git checkout tags/${SABNZBD_VER} \
