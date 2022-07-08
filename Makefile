@@ -13,6 +13,7 @@ help:
 	@echo " status     - show running container ps info"
 	@echo " sabshell   - launch shell in SABnzbd container"
 	@echo " sonshell   - launch shell in Sonarr container"
+	@echo " radshell   - launch shell in Radarr container"
 	@echo " start      - launch the container(s)"
 	@echo " stop       - stop container(s)"
 	@echo " venv       - first time use to setup virtual env"

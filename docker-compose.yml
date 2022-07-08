@@ -22,6 +22,18 @@ services:
             - "127.0.0.1:8989:8989/tcp"
         depends_on:
             - "sabnzbd"
+    radarr:
+        build: radarr
+        image: cronos/radarr
+        hostname: radarr
+        restart: unless-stopped
+        volumes:
+            - $PWD/data:/data
+            - $PWD/config/radarr:/home/radarr/.config/Radarr
+        ports:
+            - "127.0.0.1:7878:7878/tcp"
+        depends_on:
+            - "sabnzbd"
     plex:
         image: linuxserver/plex
         hostname: plex
