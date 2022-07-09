@@ -1,5 +1,4 @@
-FROM mono:latest
-ENV MEDIAAREA_VER 1.0-20
+FROM debian:11
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && echo $TZ > /etc/localtime \
@@ -7,13 +6,9 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get -y install \
         wget \
         ca-certificates \
-        apt-transport-https \
-    && wget https://mediaarea.net/repo/deb/repo-mediaarea_${MEDIAAREA_VER}_all.deb \
-    && dpkg -i repo-mediaarea_${MEDIAAREA_VER}_all.deb \
-    && rm repo-mediaarea_${MEDIAAREA_VER}_all.deb \
-    && apt-get update \
-    && apt-get -y install \
-        libmediainfo-dev \
+        sqlite3 \
+        curl \
+        libicu-dev \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -g 1000 radarr \
     && useradd -s /sbin/nologin -u 1000 -g 1000 -d /home/radarr -m radarr \
@@ -25,4 +20,4 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     | tar xz
 USER radarr
 WORKDIR /Radarr
-CMD ["./Radarr"]
+CMD ["./Radarr", "-nobrowser"]

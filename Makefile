@@ -39,6 +39,9 @@ sabshell:
 sonshell:
 	@bin/son_shell
 
+radshell:
+	@bin/rad_shell
+
 tail:
 	@$(COMPOSE) logs -f
 
