@@ -20,4 +20,4 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     | tar xz
 USER radarr
 WORKDIR /Radarr
-CMD ["./Radarr", "-nobrowser"]
+CMD ["./Radarr"]
