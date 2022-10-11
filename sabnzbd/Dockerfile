@@ -15,6 +15,7 @@ RUN apk add --no-cache \
         rust \
         cargo \
         par2cmdline \
+        bash \
     && ln -s /usr/local/bin/python3 /usr/bin/python3 \
     && addgroup -S sabnzbd -g 1000 \
     && adduser -s /sbin/nologin -u 1000 -S sabnzbd -G sabnzbd \

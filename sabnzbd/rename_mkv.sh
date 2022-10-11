@@ -1,53 +1,67 @@
-#!/bin/sh
+#!/usr/bin/env bash
 USAGE="$0"
 FINAL_DIR="$1"
 JOB_NAME="$2"
-INDEX_REPORT="$3"
+CLEAN_NAME="$3"
+INDEX_REPORT="$4"
 CATEGORY="$5"
 GROUP="$6"
 STATUS="$7"
 URL="$8"
 
-MATROSKA="Matroska data"
-EXT="mkv"
 EXIT_CODE="${STATUS}"
 EXIT_STRING="Completed"
+fileInfo=('Matroska data' 'ISO Media, MP4 Base Media v1 [ISO 14496-12:2003]')
+fileExts=("mkv" "mp4")
 
-if [ -z $FINAL_DIR ]
+echo "Invocation: ${USAGE}"
+echo "Final directory: ${FINAL_DIR}"
+echo "Job name: ${JOB_NAME}"
+echo "Clean name: ${CLEAN_NAME}"
+echo "Index report: ${INDEX_REPORT}"
+echo "Category: ${CATEGORY}"
+echo "Group: ${GROUP}"
+echo "Status: ${STATUS}"
+echo "URL: ${URL}"
+echo
+
+if ! [ -d $FINAL_DIR ]
 then
     echo "Missing Final Directory..." >&2
     exit 1
 fi
 
-echo "Job name: ${JOB_NAME}"
-echo "Final directory: ${FINAL_DIR}"
-echo "Index report: ${INDEX_REPORT}"
-echo "Category: ${CATEGORY}"
-echo "Processing status: ${STATUS}"
-echo "Group: ${GROUP}"
-echo "URL: ${URL}"
+if [ "${STATUS}" != 0 ]
+then
+    echo "Task did not succeed, exiting." >&2
+    exit 0
+fi
 
 for entry in "$FINAL_DIR"/*
 do
     echo "Entry: ${entry}"
     TYPE=`file -b "${entry}"`
-    if [ "${TYPE}" == "${MATROSKA}" ]
-    then
-        BASENAME=`basename "${entry}"`
-        EXTENSION="${BASENAME##*.}"
-        echo "Entry extension: ${EXTENSION}"
-        if [ "${EXTENSION}" != "${EXT}" ]
+    echo "Type: ${TYPE}"
+    for i in "${!fileInfo[@]}"
+    do
+        if [ "${fileInfo[$i]}" = "${TYPE}" ]
         then
-            if mv "${entry}" "${entry}.${EXT}"
+            #check the file extension
+            #add file extension if missing
+            if ! echo "${entry}" | grep -i -q -e "\\.${fileExts[$i]}\$"
             then
-                echo -e "Renamed \n\t${entry} \n\tto \n\t${entry}.${EXT}"
-            else
-                echo -e "Failed, could not rename \n\t${entry} \n\tto \n\t${entry}.${EXT}" >&2
-                EXIT_CODE=1
+                if mv -n "${entry}" "${entry}.${fileExts[$i]}"
+                then
+                    printf "Renamed: \n    ${entry}\n    ${entry}.${fileExts[$i]}\n"
+                else
+                    printf "Unable to rename: \n    ${entry}\n    ${entry}.${fileExts[$i]}\n"
+                    EXIT_CODE=1
+                fi
+                EXIT_STRING="Renamed"
             fi
-            EXIT_STRING="Renamed"
         fi
-    fi
+    done
+    echo
 done
 echo "${EXIT_STRING}"
 exit ${EXIT_CODE}
