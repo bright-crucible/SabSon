@@ -11,8 +11,8 @@ URL="$8"
 
 EXIT_CODE="${STATUS}"
 EXIT_STRING="Completed"
-fileInfo=('Matroska data' 'ISO Media, MP4 Base Media v1 [ISO 14496-12:2003]')
-fileExts=("mkv" "mp4")
+fileInfo=('Matroska data' 'ISO Media, MP4 Base Media v1 [ISO 14496-12:2003]' 'ASCII text, with CRLF, LF line terminators')
+fileExts=("mkv" "mp4" "srt")
 
 echo "Invocation: ${USAGE}"
 echo "Final directory: ${FINAL_DIR}"
