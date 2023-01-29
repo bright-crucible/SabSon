@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+shopt -s dotglob
 USAGE="$0"
 FINAL_DIR="$1"
 JOB_NAME="$2"
