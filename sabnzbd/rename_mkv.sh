@@ -12,8 +12,8 @@ URL="$8"
 
 EXIT_CODE="${STATUS}"
 EXIT_STRING="Completed"
-fileInfo=('Matroska data' 'ISO Media, MP4 Base Media v1 [ISO 14496-12:2003]')
-fileExts=("mkv" "mp4")
+fileInfo=('Matroska data' 'ISO Media, MP4 Base Media v1 [ISO 14496-12:2003]' 'SubRip')
+fileExts=("mkv" "mp4" "srt")
 
 echo "Invocation: ${USAGE}"
 echo "Final directory: ${FINAL_DIR}"
@@ -45,7 +45,7 @@ do
     echo "Type: ${TYPE}"
     for i in "${!fileInfo[@]}"
     do
-        if [ "${fileInfo[$i]}" = "${TYPE}" ]
+        if echo "${TYPE}" | grep -q -F "${fileInfo[$i]}"
         then
             #check the file extension
             #add file extension if missing
