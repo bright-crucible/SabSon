@@ -1,4 +1,4 @@
-.PHONY: backup build logs start stop status sabshell sonshell radshell venv
+.PHONY: backup build logs start stop status sabshell sonshell radshell tail
 
 help:
 	@echo "SABnzbd and Sonarr in containers!"
@@ -14,7 +14,6 @@ help:
 	@echo " radshell   - launch shell in Radarr container"
 	@echo " start      - launch the container(s)"
 	@echo " stop       - stop container(s)"
-	@echo " venv       - first time use to setup virtual env"
 
 build:
 	@bin/build
@@ -42,6 +41,3 @@ radshell:
 
 tail:
 	docker compose logs -f
-
-venv:
-	@bin/build_virtualenv
