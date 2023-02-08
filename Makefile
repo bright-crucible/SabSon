@@ -1,6 +1,4 @@
-.PHONY: backup build logs start stop status sabshell sonshell venv
-
-COMPOSE="venv/bin/docker-compose"
+.PHONY: backup build logs start stop status sabshell sonshell radshell venv
 
 help:
 	@echo "SABnzbd and Sonarr in containers!"
@@ -22,7 +20,7 @@ build:
 	@bin/build
 
 logs:
-	@$(COMPOSE) logs
+	docker compose logs
 
 start:
 	@bin/start
@@ -31,7 +29,7 @@ stop:
 	@bin/stop
 
 status:
-	@$(COMPOSE) ps
+	docker compose ps
 
 sabshell:
 	@bin/sab_shell
@@ -43,7 +41,7 @@ radshell:
 	@bin/rad_shell
 
 tail:
-	@$(COMPOSE) logs -f
+	docker compose logs -f
 
 venv:
 	@bin/build_virtualenv

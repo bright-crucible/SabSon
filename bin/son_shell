@@ -1,2 +1,2 @@
 #!/bin/bash
-./venv/bin/docker-compose exec sonarr /bin/bash
+docker compose exec sonarr /bin/bash

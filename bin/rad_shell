@@ -1,2 +1,2 @@
 #!/bin/bash
-./venv/bin/docker-compose exec radarr /bin/bash
+docker compose exec radarr /bin/bash

@@ -1,2 +1,2 @@
 #!/bin/bash
-./venv/bin/docker-compose exec sabnzbd /bin/sh
+docker compose exec sabnzbd /bin/sh

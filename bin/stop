@@ -1,2 +1,2 @@
 #!/bin/bash
-./venv/bin/docker-compose down --volumes --remove-orphans
+docker compose down --volumes --remove-orphans
