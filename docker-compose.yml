@@ -34,6 +34,17 @@ services:
             - "127.0.0.1:7878:7878/tcp"
         depends_on:
             - "sabnzbd"
+    nzbhydra2:
+        build: nzbhydra2
+        image: cronos/nzbhydra2
+        hostname: nzbhydra2
+        restart: unless-stopped
+        volumes:
+            - $PWD/config/nzbhydra2:/config
+        ports:
+            - "127.0.0.1:5076:5076/tcp"
+        depends_on:
+            - "sabnzbd"
     plex:
         image: linuxserver/plex
         hostname: plex
