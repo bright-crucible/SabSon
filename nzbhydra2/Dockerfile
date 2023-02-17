@@ -17,4 +17,4 @@ RUN apk add --no-cache \
     && rm "nzbhydra2-${NZBHYDRA2_VER}-generic.zip"
 USER nzbhydra
 WORKDIR /nzbhydra2
-CMD ["python3", "nzbhydra2wrapperPy3.py", "--nobrowser", "--datafolder", "/config", "--xmx", "512"]
+CMD ["python3", "nzbhydra2wrapperPy3.py", "--nobrowser", "--datafolder", "/config"]

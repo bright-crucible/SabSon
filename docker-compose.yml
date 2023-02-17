@@ -36,6 +36,19 @@ services:
         depends_on:
             - "sabnzbd"
             - "nzbhydra2"
+    lidarr:
+        build: lidarr
+        image: cronos/lidarr
+        hostname: lidarr
+        restart: unless-stopped
+        volumes:
+            - $PWD/data:/data
+            - $PWD/config/lidarr:/home/lidarr/.config/Lidarr
+        ports:
+            - "127.0.0.1:8686:8686/tcp"
+        depends_on:
+            - "sabnzbd"
+            - "nzbhydra2"
     nzbhydra2:
         build: nzbhydra2
         image: cronos/nzbhydra2

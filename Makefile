@@ -1,4 +1,4 @@
-.PHONY: backup build logs start stop status sabshell sonshell radshell hydrashell tail
+.PHONY: backup build logs start stop status sabshell sonshell radshell lidshell hydrashell tail
 
 help:
 	@echo "SABnzbd and Sonarr in containers!"
@@ -12,6 +12,7 @@ help:
 	@echo " sabshell   - launch shell in SABnzbd container"
 	@echo " sonshell   - launch shell in Sonarr container"
 	@echo " radshell   - launch shell in Radarr container"
+	@echo " lidshell   - launch shell in Lidarr container"
 	@echo " hydrashell - launch shell in NZBHydra2 container"
 	@echo " start      - launch the container(s)"
 	@echo " stop       - stop container(s)"
@@ -39,6 +40,9 @@ sonshell:
 
 radshell:
 	@bin/rad_shell
+
+lidshell:
+	@bin/lid_shell
 
 hydrashell:
 	@bin/hydra_shell
