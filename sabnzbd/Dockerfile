@@ -1,6 +1,6 @@
 FROM python:3-alpine
-ENV SABNZBD_VER 4.0.2
-ENV UNRAR_VER 6.2.8
+ENV SABNZBD_VER 4.0.3
+ENV UNRAR_VER 6.2.9
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
@@ -22,8 +22,10 @@ RUN apk add --no-cache \
     && mkdir \
         /data \
         /SABnzbd \
+        /home/sabnzbd/scripts \
     && chown sabnzbd:sabnzbd \
         /data \
+        /home/sabnzbd/scripts \
     && wget -O- https://www.rarlab.com/rar/unrarsrc-${UNRAR_VER}.tar.gz \
     | tar xz \
     && cd unrar \
@@ -37,7 +39,7 @@ RUN apk add --no-cache \
     && rm -rf .git \
     && python3 -m pip install --no-cache-dir -r requirements.txt -U \
     && tools/make_mo.py
-COPY rename_mkv.sh /SABnzbd/scripts
+COPY --chown=sabnzbd:sabnzbd rename_mkv.sh /home/sabnzbd/scripts
 USER sabnzbd
 WORKDIR /SABnzbd
 CMD ["./SABnzbd.py"]
