@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:12
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && echo $TZ > /etc/localtime \
