@@ -1,6 +1,6 @@
 FROM python:3-alpine
 ENV SABNZBD_VER 4.1.0
-ENV UNRAR_VER 6.2.11
+ENV UNRAR_VER 6.2.12
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
