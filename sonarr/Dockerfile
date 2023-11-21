@@ -2,7 +2,6 @@ FROM mono:latest
 ENV MEDIAAREA_VER 1.0-24
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
-    && echo $TZ > /etc/localtime \
     && apt-get update \
     && apt-get -y install \
         wget \
