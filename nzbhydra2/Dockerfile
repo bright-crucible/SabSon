@@ -1,5 +1,5 @@
 FROM python:3-alpine
-ENV NZBHYDRA2_VER 5.3.5
+ENV NZBHYDRA2_VER 5.3.7
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
