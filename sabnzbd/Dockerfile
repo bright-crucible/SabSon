@@ -5,7 +5,7 @@ ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
         unzip \
-        p7zip \
+        7zip \
         build-base \
         git \
         automake \
