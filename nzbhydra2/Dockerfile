@@ -1,20 +1,26 @@
-FROM python:3-alpine
+FROM debian:12
 ENV NZBHYDRA2_VER 5.3.8
-ENV TZ America/Los_Angeles
-RUN apk add --no-cache \
-        tzdata \
-        openjdk17-jre-headless \
-    && addgroup -S nzbhydra -g 1000 \
-    && adduser -s /sbin/nologin -u 1000 -S nzbhydra -G nzbhydra \
+ENV TZ=America/Los_Angeles
+RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
+    && apt-get update \
+    && apt-get -y install \
+        wget \
+        libfreetype6 \
+        openjdk-17-jre-headless \
+        python3 \
+        unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd -g 1000 nzbhydra \
+    && useradd -s /sbin/nologin -u 1000 -g 1000 -d /home/nzbhydra -m nzbhydra \
     && mkdir \
         /nzbhydra2 \
         /config \
     && chown nzbhydra:nzbhydra \
         /config \
     && cd /nzbhydra2 \
-    && wget "https://github.com/theotherp/nzbhydra2/releases/download/v${NZBHYDRA2_VER}/nzbhydra2-${NZBHYDRA2_VER}-generic.zip" \
-    && unzip "nzbhydra2-${NZBHYDRA2_VER}-generic.zip" \
-    && rm "nzbhydra2-${NZBHYDRA2_VER}-generic.zip"
+    && wget "https://github.com/theotherp/nzbhydra2/releases/download/v${NZBHYDRA2_VER}/nzbhydra2-${NZBHYDRA2_VER}-amd64-linux.zip" \
+    && unzip "nzbhydra2-${NZBHYDRA2_VER}-amd64-linux.zip" \
+    && rm "nzbhydra2-${NZBHYDRA2_VER}-amd64-linux.zip"
 USER nzbhydra
 WORKDIR /nzbhydra2
 CMD ["python3", "nzbhydra2wrapperPy3.py", "--nobrowser", "--datafolder", "/config"]
