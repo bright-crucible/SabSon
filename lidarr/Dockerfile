@@ -9,6 +9,7 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
         sqlite3 \
         curl \
         libicu-dev \
+        libchromaprint-tools \
         apt-transport-https \
     && wget https://mediaarea.net/repo/deb/repo-mediaarea_${MEDIAAREA_VER}_all.deb \
     && dpkg -i repo-mediaarea_${MEDIAAREA_VER}_all.deb \
