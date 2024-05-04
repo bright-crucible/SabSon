@@ -1,6 +1,7 @@
 FROM python:3-alpine
-ENV SABNZBD_VER 4.2.3
+ENV SABNZBD_VER 4.3.1
 ENV UNRAR_VER 7.0.8
+ENV PAR2MCDLINE_VER 1.1.1
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
@@ -14,7 +15,6 @@ RUN apk add --no-cache \
         openssl-dev \
         rust \
         cargo \
-        par2cmdline \
         bash \
     && ln -s /usr/local/bin/python3 /usr/bin/python3 \
     && addgroup -S sabnzbd -g 1000 \
@@ -33,6 +33,15 @@ RUN apk add --no-cache \
     && make install \
     && cd .. \
     && rm -rf unrar \
+    && wget -O- https://github.com/animetosho/par2cmdline-turbo/archive/refs/tags/v${PAR2MCDLINE_VER}.tar.gz \
+    | tar xz \
+    && cd par2cmdline-turbo-${PAR2MCDLINE_VER} \
+    && ./automake.sh \
+    && ./configure \
+    && make -j12 \
+    && make install \
+    && cd .. \
+    && rm -rf par2cmdline-turbo-${PAR2MCDLINE_VER} \
     && git clone https://github.com/sabnzbd/sabnzbd.git SABnzbd \
     && cd SABnzbd \
     && git checkout tags/${SABNZBD_VER} \
