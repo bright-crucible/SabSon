@@ -1,3 +1,4 @@
+---
 services:
     sabnzbd:
         build: sabnzbd
@@ -60,13 +61,14 @@ services:
         depends_on:
             - "sabnzbd"
     plex:
-        image: linuxserver/plex
+        image: lscr.io/linuxserver/plex:latest
         hostname: plex
         container_name: plex
         network_mode: host
         environment:
             - PUID=1000
             - PGID=1000
+            - TZ=America/Los_Angeles
             - VERSION=docker
             - UMASK=022
         volumes:
@@ -74,3 +76,19 @@ services:
             - $PWD/config/plex-transcode:/transcode
             - $PWD/data:/data:ro
         restart: unless-stopped
+    jellyfin:
+        image: lscr.io/linuxserver/jellyfin:latest
+        hostname: jellyfin
+        container_name: jellyfin
+        network_mode: host
+        environment:
+            - PUID=1000
+            - GUID=1000
+            - TZ=America/Los_Angeles
+        volumes:
+            - $PWD/config/jellyfin:/config
+            - $PWD/config/jellyfin-cache:/cache
+            - $PWD/data:/data:ro
+        restart: unless-stopped
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
