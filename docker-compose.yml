@@ -63,6 +63,7 @@ services:
     plex:
         image: lscr.io/linuxserver/plex:latest
         hostname: plex
+        runtime: nvidia
         container_name: plex
         network_mode: host
         environment:
@@ -71,6 +72,7 @@ services:
             - TZ=America/Los_Angeles
             - VERSION=docker
             - UMASK=022
+            - NVIDIA_VISIBLE_DEVICES=all
         volumes:
             - $PWD/config/plex:/config
             - $PWD/config/plex-transcode:/transcode
@@ -79,12 +81,14 @@ services:
     jellyfin:
         image: lscr.io/linuxserver/jellyfin:latest
         hostname: jellyfin
+        runtime: nvidia
         container_name: jellyfin
         network_mode: host
         environment:
             - PUID=1000
             - PGID=1000
             - TZ=America/Los_Angeles
+            - NVIDIA_VISIBLE_DEVICES=all
         volumes:
             - $PWD/config/jellyfin:/config
             - $PWD/config/jellyfin-cache:/cache
