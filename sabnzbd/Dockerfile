@@ -1,6 +1,6 @@
 FROM python:3-alpine
 ENV SABNZBD_VER 4.3.1
-ENV UNRAR_VER 7.0.8
+ENV UNRAR_VER 7.0.9
 ENV PAR2MCDLINE_VER 1.1.1
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
