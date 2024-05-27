@@ -60,6 +60,16 @@ services:
             - "127.0.0.1:5076:5076/tcp"
         depends_on:
             - "sabnzbd"
+    rproxy:
+        build: rproxy
+        image: cronos/rproxy
+        hostname: rproxy
+        restart: unless-stopped
+        volumes:
+            - $PWD/config/nginx:/usr/share/nginx:ro
+            - $PWD/config/nginx-config:/etc/nginx/sites-available:ro
+        ports:
+            - "4209:4209/tcp"
     plex:
         image: lscr.io/linuxserver/plex:latest
         hostname: plex

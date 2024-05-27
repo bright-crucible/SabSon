@@ -14,6 +14,7 @@ help:
 	@echo " radshell   - launch shell in Radarr container"
 	@echo " lidshell   - launch shell in Lidarr container"
 	@echo " hydrashell - launch shell in NZBHydra2 container"
+	@echo " rproxshell - launch shell in nginx container"
 	@echo " plexshell  - launch shell in Plex container"
 	@echo " jellyshell - launch shell in Jellyfin container"
 	@echo " start      - launch the container(s)"
@@ -48,6 +49,9 @@ lidshell:
 
 hydrashell:
 	@bin/hydra_shell
+
+rproxshell:
+	@bin/rprox_shell
 
 plexshell:
 	@bin/plex_shell
