@@ -86,6 +86,7 @@ services:
         volumes:
             - $PWD/config/plex:/config
             - $PWD/config/plex-transcode:/transcode
+            - $PWD/config/home-video:/home-video:ro
             - $PWD/data:/data:ro
         restart: unless-stopped
     jellyfin:
@@ -102,6 +103,7 @@ services:
         volumes:
             - $PWD/config/jellyfin:/config
             - $PWD/config/jellyfin-cache:/cache
+            - $PWD/config/home-video:/home-video:ro
             - $PWD/data:/data:ro
         restart: unless-stopped
         extra_hosts:
