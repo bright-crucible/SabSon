@@ -1,5 +1,5 @@
 FROM debian:12
-ENV MEDIAAREA_VER 1.0-24
+ENV MEDIAAREA_VER 1.0-25
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get update \
