@@ -70,6 +70,12 @@ services:
             - $PWD/config/nginx-config:/etc/nginx/sites-available:ro
         ports:
             - "4209:4209/tcp"
+        depends_on:
+            - "sabnzbd"
+            - "sonarr"
+            - "radarr"
+            - "lidarr"
+            - "nzbhydra2"
     plex:
         image: lscr.io/linuxserver/plex:latest
         hostname: plex
