@@ -81,6 +81,7 @@ services:
     caddy:
         image: cronos/caddy
         build: caddy
+        hostname: caddy
         restart: unless-stopped
         ports:
             - "8920:8920/tcp"
