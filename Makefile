@@ -1,24 +1,27 @@
-.PHONY: backup build logs start stop status sabshell sonshell radshell lidshell hydrashell tail
+.PHONY: build logs start stop status sabshell sonshell radshell lidshell certshell hydrashell tail
 
 help:
 	@echo "SABnzbd and Sonarr in containers!"
 	@echo ""
 	@echo "Commands:"
 	@echo ""
-	@echo " build      - build docker images locally"
-	@echo " help       - print this help"
-	@echo " logs       - print container logs"
-	@echo " status     - show running container ps info"
-	@echo " sabshell   - launch shell in SABnzbd container"
-	@echo " sonshell   - launch shell in Sonarr container"
-	@echo " radshell   - launch shell in Radarr container"
-	@echo " lidshell   - launch shell in Lidarr container"
-	@echo " hydrashell - launch shell in NZBHydra2 container"
-	@echo " rproxshell - launch shell in nginx container"
-	@echo " plexshell  - launch shell in Plex container"
-	@echo " jellyshell - launch shell in Jellyfin container"
-	@echo " start      - launch the container(s)"
-	@echo " stop       - stop container(s)"
+	@echo " build       - build docker images locally"
+	@echo " help        - print this help"
+	@echo " logs        - print container logs"
+	@echo " status      - show running container ps info"
+	@echo " letsencrypt - run letsencrypt renewal"
+	@echo " sabshell    - launch shell in SABnzbd container"
+	@echo " sonshell    - launch shell in Sonarr container"
+	@echo " radshell    - launch shell in Radarr container"
+	@echo " lidshell    - launch shell in Lidarr container"
+	@echo " hydrashell  - launch shell in NZBHydra2 container"
+	@echo " rproxshell  - launch shell in nginx container"
+	@echo " certshell   - launch shell in certbot container"
+	@echo " caddyshell  - launch shell in caddy container"
+	@echo " plexshell   - launch shell in Plex container"
+	@echo " jellyshell  - launch shell in Jellyfin container"
+	@echo " start       - launch the container(s)"
+	@echo " stop        - stop container(s)"
 
 build:
 	@bin/build
@@ -34,6 +37,9 @@ stop:
 
 status:
 	docker compose ps
+
+letsencrypt:
+	@bin/run_le
 
 sabshell:
 	@bin/sab_shell
@@ -52,6 +58,12 @@ hydrashell:
 
 rproxshell:
 	@bin/rprox_shell
+
+certshell:
+	@bin/cert_shell
+
+caddyshell:
+	@bin/caddy_shell
 
 plexshell:
 	@bin/plex_shell

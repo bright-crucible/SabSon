@@ -1,0 +1,7 @@
+#!/bin/bash
+cd /home/baratus/Documents/news/
+rm -f ./config/certbot/renewal
+docker compose exec -T certbot certbot renew
+if [ -f ./config/certbot/renewal ]; then
+    docker compose restart rproxy
+fi

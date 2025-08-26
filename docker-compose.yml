@@ -68,14 +68,40 @@ services:
         volumes:
             - $PWD/config/nginx:/usr/share/nginx:ro
             - $PWD/config/nginx-config:/etc/nginx/sites-available:ro
+            - $PWD/config/letsencrypt:/etc/letsencrypt:ro
         ports:
             - "4209:4209/tcp"
+            - "4554:4554/tcp"
         depends_on:
             - "sabnzbd"
             - "sonarr"
             - "radarr"
             - "lidarr"
             - "nzbhydra2"
+    caddy:
+        image: cronos/caddy
+        build: caddy
+        restart: unless-stopped
+        ports:
+            - "8920:8920/tcp"
+            - "8920:8920/udp"
+        volumes:
+            - $PWD/config/caddy/Caddyfile:/etc/caddy/Caddyfile
+            - $PWD/config/caddy/data:/data
+            - $PWD/config/caddy/config:/config
+        environment:
+            - PORKBUN_API_KEY
+            - PORKBUN_API_SECRET
+        depends_on:
+            - jellyfin
+        user: "1000:1000"
+    certbot:
+        build: certbot
+        image: cronos/certbot
+        restart: unless-stopped
+        volumes:
+            - $PWD/config/letsencrypt:/etc/letsencrypt
+            - $PWD/config/certbot:/var/lib/letsencrypt
     plex:
         image: lscr.io/linuxserver/plex:latest
         hostname: plex
@@ -100,17 +126,17 @@ services:
         hostname: jellyfin
         runtime: nvidia
         container_name: jellyfin
-        network_mode: host
+        ports:
+            - "7359:7359/udp"
         environment:
             - PUID=1000
             - PGID=1000
             - TZ=America/Los_Angeles
             - NVIDIA_VISIBLE_DEVICES=all
+            - JELLYFIN_PublishedServerUrl=${JELLYFIN_PUBLISHED_SERVER_URL}
         volumes:
             - $PWD/config/jellyfin:/config
             - $PWD/config/jellyfin-cache:/cache
             - $PWD/config/home-video:/home-video:ro
             - $PWD/data:/data:ro
         restart: unless-stopped
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
