@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:13
 ENV NZBHYDRA2_VER 7.16.3
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
@@ -6,7 +6,7 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get -y install \
         wget \
         libfreetype6 \
-        openjdk-17-jre-headless \
+        openjdk-21-jre-headless \
         python3 \
         unzip \
     && rm -rf /var/lib/apt/lists/* \
