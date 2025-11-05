@@ -2,11 +2,11 @@ FROM python:3-alpine
 ENV SABNZBD_VER 4.5.4
 ENV UNRAR_VER 7.2.1
 ENV PAR2MCDLINE_VER 1.3.0
+ENV _7Z_VER 2501
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
         unzip \
-        7zip \
         build-base \
         git \
         automake \
@@ -16,6 +16,8 @@ RUN apk add --no-cache \
         rust \
         cargo \
         bash \
+        tar \
+        xz \
     && ln -s /usr/local/bin/python3 /usr/bin/python3 \
     && addgroup -S sabnzbd -g 1000 \
     && adduser -s /sbin/nologin -u 1000 -S sabnzbd -G sabnzbd \
@@ -26,6 +28,9 @@ RUN apk add --no-cache \
     && chown sabnzbd:sabnzbd \
         /data \
         /home/sabnzbd/scripts \
+    && wget -O- https://7-zip.org/a/7z${_7Z_VER}-linux-x64.tar.xz \
+    | tar -xJv -C /usr/local/bin 7zzs \
+    && ln -s 7zzs /usr/local/bin/7z \
     && wget -O- https://www.rarlab.com/rar/unrarsrc-${UNRAR_VER}.tar.gz \
     | tar xz \
     && cd unrar \
