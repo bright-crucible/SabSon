@@ -1,8 +1,8 @@
 FROM python:3-alpine
 ENV SABNZBD_VER 4.5.5
-ENV UNRAR_VER 7.2.3
-ENV PAR2MCDLINE_VER 1.3.0
-ENV _7Z_VER 2501
+ENV UNRAR_VER 7.2.4
+ENV PAR2MCDLINE_VER 1.4.0
+ENV _7Z_VER 2600
 ENV TZ America/Los_Angeles
 RUN apk add --no-cache \
         tzdata \
