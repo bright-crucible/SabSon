@@ -97,7 +97,6 @@ services:
     plex:
         image: lscr.io/linuxserver/plex:latest
         hostname: plex
-        runtime: nvidia
         container_name: plex
         network_mode: host
         environment:
@@ -112,11 +111,12 @@ services:
             - $PWD/config/plex-transcode:/transcode
             - $PWD/config/home-video:/home-video:ro
             - $PWD/data:/data:ro
+        devices:
+            - /dev/dri:/dev/dri
         restart: unless-stopped
     jellyfin:
         image: lscr.io/linuxserver/jellyfin:latest
         hostname: jellyfin
-        runtime: nvidia
         container_name: jellyfin
         ports:
             - "7359:7359/udp"
@@ -131,4 +131,6 @@ services:
             - $PWD/config/jellyfin-cache:/cache
             - $PWD/config/home-video:/home-video:ro
             - $PWD/data:/data:ro
+        devices:
+            - /dev/dri:/dev/dri
         restart: unless-stopped
