@@ -1,5 +1,5 @@
 FROM debian:13
-ENV NZBHYDRA2_VER 8.8.3
+ENV NZBHYDRA2_VER 8.8.4
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get update \
