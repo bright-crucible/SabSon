@@ -46,6 +46,7 @@ services:
         image: cronos/nzbhydra2
         hostname: nzbhydra2
         restart: unless-stopped
+        stop_grace_period: 120s
         volumes:
             - $PWD/config/nzbhydra2:/config
         depends_on:
