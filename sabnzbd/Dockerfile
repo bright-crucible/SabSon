@@ -1,9 +1,12 @@
 FROM python:3-alpine
 ENV SABNZBD_VER 5.1.3
-ENV UNRAR_VER 7.3.1
+ENV UNRAR_VER 7.3.2
 ENV PAR2MCDLINE_VER 1.5.0
-ENV _7Z_VER 2604
+ENV _7Z_VER 2605
+ENV _7Z_VER2 26.05
 ENV TZ America/Los_Angeles
+#https://github.com/ip7z/7zip/releases/download/${_7Z_VER2}/7z${_7Z_VER}-linux-x64.tar.xz
+#https://7-zip.org/a/7z${_7Z_VER}-linux-x64.tar.xz
 RUN apk add --no-cache \
         tzdata \
         unzip \
@@ -28,7 +31,7 @@ RUN apk add --no-cache \
     && chown sabnzbd:sabnzbd \
         /data \
         /home/sabnzbd/scripts \
-    && wget -O- https://7-zip.org/a/7z${_7Z_VER}-linux-x64.tar.xz \
+    && wget -O- https://github.com/ip7z/7zip/releases/download/${_7Z_VER2}/7z${_7Z_VER}-linux-x64.tar.xz \
     | tar -xJv -C /usr/local/bin 7zzs \
     && ln -s 7zzs /usr/local/bin/7z \
     && wget -O- https://www.rarlab.com/rar/unrarsrc-${UNRAR_VER}.tar.gz \
