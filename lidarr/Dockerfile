@@ -1,5 +1,4 @@
 FROM debian:13
-ENV MEDIAAREA_VER 1.0-27
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && apt-get update \
@@ -10,13 +9,7 @@ RUN ln -snf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
         curl \
         libicu-dev \
         libchromaprint-tools \
-        apt-transport-https \
-    && wget https://mediaarea.net/repo/deb/repo-mediaarea_${MEDIAAREA_VER}_all.deb \
-    && dpkg -i repo-mediaarea_${MEDIAAREA_VER}_all.deb \
-    && rm repo-mediaarea_${MEDIAAREA_VER}_all.deb \
-    && apt-get update \
-    && apt-get -y install \
-        libmediainfo-dev \
+        libmediainfo0v5 \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -g 1000 lidarr \
     && useradd -s /sbin/nologin -u 1000 -g 1000 -d /home/lidarr -m lidarr \
