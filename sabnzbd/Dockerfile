@@ -2,8 +2,8 @@ FROM python:3-alpine
 ENV SABNZBD_VER 5.1.3
 ENV UNRAR_VER 7.3.2
 ENV PAR2MCDLINE_VER 1.5.0
-ENV _7Z_VER 2605
-ENV _7Z_VER2 26.05
+ENV _7Z_VER 2606
+ENV _7Z_VER2 26.06
 ENV TZ America/Los_Angeles
 #https://github.com/ip7z/7zip/releases/download/${_7Z_VER2}/7z${_7Z_VER}-linux-x64.tar.xz
 #https://7-zip.org/a/7z${_7Z_VER}-linux-x64.tar.xz
